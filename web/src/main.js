@@ -1,7 +1,24 @@
 import Vue from 'vue'
-import App from './App.vue'
+import 'iview/dist/styles/iview.css'
+import single from './single.vue'
+import multiple from './multiple.vue';
+
+var routes = {
+	'/single': single,
+	'/multiple': multiple,
+}
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
+	el: '#app',
+	data: {
+		currentRoute: window.location.pathname
+	},
+	computed: {
+		ViewComponent () {
+		return routes[this.currentRoute]
+		}
+	},
+	render (h) {
+		return h(this.ViewComponent)
+	}
 })
