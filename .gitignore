@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+nohup.out
+*.png
+
 # C extensions
 *.so
 
