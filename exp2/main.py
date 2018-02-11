@@ -1,5 +1,6 @@
 #-*- coding:utf8 -*-
 
+import math
 import pymysql
 from sklearn.manifold import MDS
 import numpy as np
@@ -14,7 +15,7 @@ def z_score(s, inplace=True):
 	# 计算标准差
 	std = 0.
 	for x in s:
-		var += (x-avg)**2
+		std += (x-avg)**2
 	std /= len(s) - 1
 	std = math.sqrt(std)
 	# 计算标准化后的数据值
@@ -56,8 +57,9 @@ def solve(field):
 	n = len(contracts)
 	# 查询各合约相应字段的数值系列，data中序列顺序与contracts对应
 	data = []
+	sql = "select {} from contract_daily where vari=%s and deli=%s order by day asc".format(field)
 	for vari,deli in contracts:
-		cursor.execute("select %s from contract_daily where vari=%s and deli=%s order by day asc", (field, vari, deli))
+		cursor.execute(sql, (vari, deli))
 		data.append(z_score([float(row[0]) for row in cursor.fetchall()], inplace=True))
 	# 计算时间序列间的距离
 	mat = np.mat(np.zeros((n, n)))
