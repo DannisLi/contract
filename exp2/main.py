@@ -46,9 +46,8 @@ def solve(field):
 	conn = pymysql.connect(
 		host= '219.224.169.45',
 		user= 'lizimeng',
-		password= 'lizimeng',
+		password= 'codegeass',
 		db= 'market',
-		charset= 'utf8'
 	)
 	cursor = conn.cursor()
 	# 查询研究范围内的合约的品种vari和交割期deli
