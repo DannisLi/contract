@@ -23,8 +23,12 @@ def z_score(s, inplace=True):
 		res = s
 	else:
 		res = [0.] * len(s)
-	for i in range(len(s)):
-		res[i] = (s[i]-avg) / std
+	if std==0:
+		for i in range(len(s)):
+			res[i] = 0.
+	else:
+		for i in range(len(s)):
+			res[i] = (s[i]-avg) / std
 	return res
 
 def dtw(s1, s2):
