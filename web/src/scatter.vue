@@ -1,8 +1,8 @@
-<template scoped>
+<template>
 	<div :id="field" style="width:1200px;height:650px;margin:0 auto;"></div>
 </template>
 
-<script scoped>
+<script>
 	import echarts from 'echarts';
 	import $ from 'jquery';
 	
