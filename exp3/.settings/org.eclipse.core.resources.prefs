@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding/dataSet.py=utf8
+encoding/date.py=utf8
 encoding/db.py=utf8
-encoding/main.py=utf8
-encoding/tradingDay.py=utf8
+encoding/knn.py=utf8
+encoding/logit.py=utf8
+encoding/naiveBayes.py=utf8

@@ -14,8 +14,10 @@ class DB(object):
         )
         self.cursor = self.conn.cursor()
     
-    def execute_sql(self, sql, params=()):
-        self.cursor.execute(sql, params)
+    def execute(self, query, params=()):
+        # 执行SQL语句并返回执行结果
+        # 若无结果，返回None；若结果只有一列，返回一个列表；过结果为多列，返回一个元组的列表，每个元组代表一行
+        self.cursor.execute(query, params)
         result = self.cursor.fetchall()
         if len(result)==0:
             return None
@@ -30,13 +32,18 @@ class DB(object):
         self.conn.close()
         
 if __name__=='__main__':
+    # test
     db = DB()
-    print (db.execute_sql("show tables"))
+    print ("只有一列、不带参数时")
+    print (db.execute("show tables"))
     print ()
-    print (db.execute_sql("select * from contract_daily where vari=%s and deli=%s", ('a','1802')))
+    print ("不存在时")
+    print (db.execute("select * from contract_daily where vari=%s and deli=%s", ('a','2002')))
     print ()
-    print (db.execute_sql("select vari from vari2exchange where exchange=%s", ('shfe',)))
+    print ("只有一列、带参数时")
+    print (db.execute("select vari from vari2exchange where exchange=%s", ('shfe',)))
     print ()
-    print (db.execute_sql("select * from contract_daily where vari=%s and deli=%s order by date asc",
-                          ('cu', '1712')))
+    print ("有多列、带参数时")
+    print (db.execute("select * from contract_daily where vari=%s and deli=%s order by date asc",
+                      ('cu', '1712')))
     
